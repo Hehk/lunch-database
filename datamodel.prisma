@@ -1,14 +1,15 @@
 type User {
   id: ID! @unique
   name: String!
-  slackId: String!
-  orders: [Order!]!
+  slackId: ID! @unique
+  orders: [Order!]! @default(value: [])
+  commands: [Command!]! @default(value: [])
 }
 
 type Restaurant {
   id: ID! @unique
   name: String!
-  sourceId: ID!
+  sourceId: ID! @unique
   location: String!
 }
 
@@ -17,4 +18,15 @@ type Order {
   content: String!
   user: User!
   restaurant: Restaurant!
+}
+
+type Command {
+  teamId: String!
+  teamDomain: String!
+  channelId: String!
+  channelName: String!
+  user: User!
+  command: String!
+  text: String!
+  id: ID! @unique
 }
